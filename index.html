@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Letter Combination Word Generator</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
             background-color: #f8f9fa;
@@ -31,14 +30,12 @@
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
     <script>
 
         let wordSet = new Set();
 
         // Load EOWL wordlist
-        fetch('https://github.com/xiayu3333/wonderwords.github.io/blob/main/freq-word.txt')
+        fetch('https://raw.githubusercontent.com/xiayu3333/wonderwords.github.io/refs/heads/main/freq-word.txt')
             .then(response => response.text())
             .then(data => {
                 data.split('\n').forEach(word => {
@@ -55,9 +52,24 @@
             resultList.innerHTML = ''; // Clear previous results
 
             // Sample word list
-            const result = findWords(input, wordList); // Call the function to generate words
+            const result = findWords(input, wordSet); // Call the function to generate words
 
-            // Display results
+          
+            // Sort the result array
+            result.sort((a, b) => {
+                // First compare the lengths
+                if (a.length !== b.length) {
+                    return a.length - b.length; // Sort by length in ascending order
+                }
+                // If lengths are the same, sort in alphabetical order
+                return a.localeCompare(b);
+            });
+
+
+            // Clear previous results
+            resultList.innerHTML = '';
+
+            // Add the sorted results to the list and display
             result.forEach(word => {
                 const li = document.createElement('li');
                 li.className = 'list-group-item';
@@ -91,7 +103,7 @@
             const uniqueWords = new Set();
 
             combinations.forEach(word => {
-                if (wordSet.includes(word)) {
+                if (wordSet.has(word)) {
                     uniqueWords.add(word);
                 }
             });
