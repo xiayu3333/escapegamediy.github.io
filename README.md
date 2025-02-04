@@ -14,8 +14,8 @@ This project contains the following files:
 ## Features
 
 - Input a set of letters to generate possible words.
-- Words are sorted by length, with shorter words appearing first.
-- Words of the same length are sorted alphabetically.
+- Generated words are sorted by length, with shorter words appearing first. Words of the same length are sorted alphabetically.
+- Generated words can be filted by length or by letter.
 
 ## Usage
 
