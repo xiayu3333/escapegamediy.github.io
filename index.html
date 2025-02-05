@@ -218,13 +218,16 @@
           resultList.appendChild(li);
           return;
         }
+        
         countMessage.textContent = `Found ${result.length} word(s):`;
+        
         result.sort((a, b) => {
           if (a.length !== b.length) {
             return a.length - b.length;
           }
           return a.localeCompare(b);
         });
+        
         result.forEach(word => {
           const li = document.createElement('li');
           li.className = 'list-group-item';
@@ -241,14 +244,14 @@
         });
         updateResultList(filteredWords);
       });
-      // Close the modal when the close button is clicked
       
+      // Close the modal when the close button is clicked      
       document.getElementById('closeModal').addEventListener('click', function() {
         const modal = document.getElementById('definitionModal');
         modal.style.display = 'none';
       });
-      // Close the modal when clicking outside of the modal content
       
+      // Close the modal when clicking outside of the modal content
       window.addEventListener('click', function(event) {
         const modal = document.getElementById('definitionModal');
         if (event.target === modal) {
@@ -347,7 +350,7 @@
       // Modify the event listener for the result list items
       function addWordClickListener(word, li) {
         li.addEventListener('click', function() {
-          if (confirm(`Do you want to see the definition of "${word}"?`)) {
+          if (confirm(`See the definition of "${word}"?`)) {
             fetchWordDefinition(word);
           }
         });
